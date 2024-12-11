@@ -27,7 +27,7 @@ def login_required(func):
             return redirect('/')
     return wrap
 
-import .user.routes
+from .user.routes import *
 
 @app.route('/', methods=('GET', 'POST'))
 def welcomepage():
