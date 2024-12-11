@@ -1,0 +1,68 @@
+.error-container{
+    width: 400px;
+    height: 100px;
+
+    font-size: 10px;
+    letter-spacing: 3px;
+
+    background-color: lightyellow;
+    position: fixed;
+    bottom: 10px;
+    left: calc(50% - 200px);
+
+    z-index: 998;
+
+    border-radius: 5px;
+    border: 2px solid blueviolet;
+
+    padding: 10px 18px;
+    /* includes padding and border in the total width and height */
+    box-sizing: border-box;
+
+    visibility: hidden;
+    /* display: none; */
+    opacity: 0;
+    transition: .5s;
+}
+
+.active-error {
+    /* display: block; */
+    visibility: visible;
+    opacity: 1;
+}
+
+.error-container-body-wrapper {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+}
+
+.error-container-body {
+    width: 100%;
+    height: 100%;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.error-toggle-button {
+    position: absolute;
+    top: -8px;
+    right: -18px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+@media (max-width: 500px) {
+    .error-container{
+        width: auto;
+        height: 100px;
+
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+    }
+ }

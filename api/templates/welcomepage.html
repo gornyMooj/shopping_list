@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+     <!-- CUSTOME CSS -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:wght@100;400&display=swap" rel="stylesheet">
+
+     <link rel="stylesheet" href="{{url_for('static', filename='CSS/style.css')}}">
+     <link rel="stylesheet" href="{{url_for('static', filename='CSS/error_message.css')}}">
+     <link rel="stylesheet" href="{{url_for('static', filename='CSS/authentication.css')}}">
+    <title>Document</title>
+</head>
+<body>
+
+
+    {% block authentication_content %}
+        
+    {% endblock authentication_content %}
+
+
+    <div class="error-container" onclick="closeErrorMessage()">
+        <div class="error-container-body-wrapper">
+            <div class="error-toggle-button">❌</div>
+            <div class="error-container-body">
+                
+            </div>
+        </div>
+    </div>
+    
+    <script src="/static/js/error_message.js"></script>
+    <script src="/static/js/authentication.js"></script>
+    
+</body>
+</html>

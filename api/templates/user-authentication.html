@@ -1,0 +1,69 @@
+{% extends 'welcomepage.html' %}
+
+{% block authentication_content %}
+
+
+
+
+<div class="wrapper-auth">
+  <div class="relative-container">
+    <div class="button-toggle-auth" onclick="toggleAuthOptions()" title="Utwórz nowe konto">Sign up</div>
+    <div id="login-container" class="toggle-aut-container active">
+      <form name="login_form" onsubmit="event.preventDefault(); logIn(event); ">
+        <table>
+          <tr>
+            <td>
+              <label for="email">email:</label>
+            </td>
+            <td>
+              <input type="email" name="email" class="field" placeholder="email address.." id="login-email">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="password">password:</label>
+            </td>
+            <td>
+              <input type="password" name="password" class="field" placeholder="password.." id="login-password">
+            </td>
+          </tr>
+        </table>
+        <input type="submit" value="Log In" class="input-submit-button" title="Zaloguj się">
+      </form>
+    </div>
+    <div id="signup-container" class="toggle-aut-container">
+      <form name="signup_form" onsubmit="event.preventDefault(); signIn(event); ">
+        <table>
+          <tr>
+            <td>
+              <label for="name">name:</label>
+            </td>
+            <td>
+              <input type="text" name="name" class="field" placeholder="your name.."  id="signup-name" required>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="name">email:</label>
+            </td>
+            <td>
+              <input type="email" name="email" placeholder="email address.." id="signup-email" required>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="password">password:</label>
+            </td>
+            <td>
+              <input type="password" name="password" class="field" placeholder="password.."  id="signup-password" required>
+            </td>
+          </tr>
+        </table>
+        <input type="submit" value="Sign Up" class="input-submit-button" title="Potwierdź utworzenie konta">
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{% endblock authentication_content %}

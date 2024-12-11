@@ -1,0 +1,135 @@
+body {
+    font-size: 26px;
+    letter-spacing: 3px;
+}
+
+.wrapper-auth {
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding-top: 40px;
+
+    width: 500px;
+    height: 400px;
+    background-color: blueviolet;
+}
+
+td label,.button-toggle-auth   {
+    font-weight: 600;
+}
+td input {
+    font-size: 20px;
+    height: 32px !important;
+    width: 300px  !important;
+ }
+
+ td {
+   height: 50px;
+ }
+
+ table {
+    margin: 20px 0;
+ }
+
+.relative-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: aquamarine;
+    
+}
+
+.toggle-aut-container {
+    position: absolute; 
+    inset: 0; /* applies top: 0;, right: 0;, bottom: 0;, and left: 0; */
+    opacity: 0;
+    visibility: hidden;
+    padding: 20px;
+    transition: opacity 1s ease-in; 
+}
+
+.toggle-aut-container.active {
+    display: block; 
+    opacity: 1; 
+    visibility: visible;
+}
+
+
+.button-toggle-auth {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: -40px;
+
+    width:  120px;
+    height:  40px;
+
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+
+    font-size: 20px;
+
+    background-color: rgba(255, 192, 203, 1);
+    /* transition: .3s; */
+
+}
+
+.button-toggle-auth:hover {
+    background-color: rgb(245, 166, 179);
+}
+
+.input-submit-button {
+    padding: 8px 16px;
+}
+
+@media (max-width: 500px) {
+    body {
+        font-size: 16px;
+    }
+
+    .wrapper-auth {
+        top: 150px;
+        left: 14px;
+        right: 14px;
+        transform: none;
+    
+        padding-top: 40px;
+    
+        height: 300px;
+        width: auto;
+    }
+
+    td input {
+        font-size: 12px;
+        height: 22px !important;
+        width: 200px  !important;
+     }
+
+     .button-toggle-auth {
+
+        top: -40px;
+    
+        width:  100px;
+        height:  40px;
+    
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+    
+        font-size: 16px;
+    
+        background-color: rgba(255, 192, 203, 1);
+        /* transition: .3s; */
+    }
+ }
+
+ @media (max-width: 400px) {
+    td input {
+        font-size: 12px;
+        height: 22px !important;
+        width: 150px  !important;
+     }
+}
