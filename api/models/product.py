@@ -2,7 +2,7 @@ from flask import jsonify
 from bson.objectid import ObjectId
 from datetime import datetime
 
-from basic import db
+from ..basic import db
 
 class Produkt: 
     @staticmethod

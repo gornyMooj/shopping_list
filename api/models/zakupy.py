@@ -2,7 +2,7 @@ from flask import jsonify, session
 from bson.objectid import ObjectId
 from datetime import datetime
 
-from basic import db
+from ..basic import db
 
 class Zakupy:
     @staticmethod

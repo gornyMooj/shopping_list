@@ -14,8 +14,8 @@ app.config["MONGO_URI"] = os.getenv("MONGO_URI")
 mongo = PyMongo(app)
 db = mongo.db
 
-from models.zakupy import *
-from models.product import Produkt
+from .models.zakupy import *
+from .models.product import Produkt
 
 # Decorators USER AUTHENTICATION
 def login_required(func):
@@ -27,7 +27,7 @@ def login_required(func):
             return redirect('/')
     return wrap
 
-import user.routes
+import .user.routes
 
 @app.route('/', methods=('GET', 'POST'))
 def welcomepage():
