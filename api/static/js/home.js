@@ -36,6 +36,7 @@ function getCurrentLocation() {
     })
 }
 async function creatdNewList() {
+    loader.style.display = "block";
     // perhaps u will need to add handler for timeoout issue
     let geoDetails = {
         lat:  'Unknown', 
@@ -94,6 +95,8 @@ async function creatdNewList() {
     } catch(error) {
         showErrorMessage('Błąd podczas wstawiania danych do bazy danych: ' + error)
     }
+
+    loader.style.display = "none";
 }	
 
 

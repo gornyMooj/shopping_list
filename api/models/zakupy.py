@@ -16,38 +16,50 @@ class Zakupy:
         '''
         try:
             query = [
-        {
-            "$match": {
-                "closed": f"{closed}",
-                "user": f"{session['user']['_id']}"
-            }
-        },
-        {
-            "$lookup": {
-                "from": "produkty",
-                "localField": "_id",
-                "foreignField": "id_zakupy",
-                "as": "products"
-            }
-        },
-        {
-            "$addFields": {
-                "count": { "$size": "$products" }
-            }
-        },
-        {
-            "$project": {
-                "name": 1,
-                "display_name": 1,
-                "created_date": 1,
-                "products_bought": 1,
-                "closed": 1,
-                "historical": 1,
-                "closed_date": 1,
-                "count": 1
-            }
-        }
-    ]
+                        {
+                            "$match": {
+                                "closed": f"{closed}",
+                                "user": f"{session['user']['_id']}"
+                            }
+                        },
+                        {
+                            "$lookup": {
+                                "from": "produkty",
+                                "localField": "_id",
+                                "foreignField": "id_zakupy",
+                                "as": "products"
+                            }
+                        },
+                        {
+                            "$addFields": {
+                                # Count total products
+                                "count": { "$size": "$products" },
+                                # Count purchased products (non-null purchase_date)
+                                "products_bought_count": {
+                                    "$size": {
+                                        "$filter": {
+                                            "input": "$products",
+                                            "as": "product",
+                                            "cond": { "$ne": ["$$product.purchase_date", None] }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "$project": {
+                                "name": 1,
+                                "display_name": 1,
+                                "created_date": 1,
+                                "products_bought": 1,
+                                "closed": 1,
+                                "historical": 1,
+                                "closed_date": 1,
+                                "count": 1,
+                                "products_bought_count": 1  # Include the new field in the output
+                            }
+                        }
+                    ]
             no_products = db.zakupy.aggregate(query)
             return no_products
         except Exception as e:

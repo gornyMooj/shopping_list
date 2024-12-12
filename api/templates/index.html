@@ -12,6 +12,8 @@
 
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/error_message.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/loader_circle.css')}}">
+    
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -34,8 +36,11 @@
         </div>
     </div>
 
+    <div class="loader" id="loader-element"></div>
 
     <script src="/static/js/scroll-up-button.js"></script>
     <script src="/static/js/error_message.js"></script>
+    <script src="/static/js/loader_circle.js"></script>
+
 </body>
 </html>

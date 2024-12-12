@@ -26,7 +26,6 @@ else:  # Local
     from models.product import Produkt
 
 
-# Decorators USER AUTHENTICATION
 def login_required(func):
     @wraps(func)
     def wrap(*arg, **kwargs):
@@ -35,7 +34,6 @@ def login_required(func):
         else:
             return redirect('/')
     return wrap
-
 
 
 if os.getenv("VERCEL_ENV"):  # on vercel 
@@ -47,14 +45,16 @@ else:  # Local
 def welcomepage():
     return render_template('user-authentication.html')
 
+
 @app.route('/home', methods=('GET', 'POST'))
 @login_required
 def home():
     ''' landing page with active lists "closed" === "false" '''
     zakupy  = list(Zakupy.get_zakupy("false"))
     no_products = [{'count': '2'}, {'count': '12'}]
-        
+    
     return render_template('home.html', zakupy = zakupy, no_products=no_products)
+
 
 @app.route('/history', methods=('GET', 'POST'))
 @login_required
@@ -130,9 +130,6 @@ def change_list_status():
         return jsonify({"error": "An unexpected error occurred when trying to close the list"}), 500
 
 
-
-
-
 @app.route('/add-product', methods=['POST'])
 @login_required
 def add_new_product():
@@ -156,8 +153,6 @@ def add_new_product():
         return jsonify({"error": "An unexpected error occurred when trying to add a new product"}), 500
 
 
-
-
 @app.route('/delete-product', methods=['POST'])
 @login_required
 def remove_product():
@@ -178,9 +173,6 @@ def remove_product():
         return jsonify({"error": "An unexpected error occurred when trying to add a new product"}), 500
 
 
-
-
-
 @app.route('/update-product-status', methods=['POST'])
 @login_required
 def update_product_status():
@@ -197,9 +189,6 @@ def update_product_status():
     except Exception as e:
         print(f"Error in remove_product route: {e}")
         return jsonify({"error": "An unexpected error occurred when trying to update product's"}), 500
-
-
-
 
 
 @app.errorhandler(404)
