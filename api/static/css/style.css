@@ -18,7 +18,7 @@ body {
 
 }
 .top-header-wrapper-list {
-    height: calc(60px + 0.5vw);
+    height: calc(80px + 0.5vw);
 }
 
 .new-list-button {

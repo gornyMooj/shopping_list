@@ -8,14 +8,23 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-app.config['SECRET_KEY'] = os.getenv("SECRET_KEY", "fallback-secret-key")
-app.config["MONGO_URI"] = os.getenv("MONGO_URI")
+if os.getenv("VERCEL_ENV"):  
+    app.config['SECRET_KEY'] = os.getenv("SECRET_KEY", "fallback-secret-key")
+    app.config["MONGO_URI"] = os.getenv("MONGO_URI") 
+else:  # Local python api/basic.py
+    app.config['SECRET_KEY']  = "mysecretkey"
+    app.config["MONGO_URI"] = "mongodb://localhost:27017/shopping_db"   
 
 mongo = PyMongo(app)
 db = mongo.db
 
-from .models.zakupy import *
-from .models.product import Produkt
+if os.getenv("VERCEL_ENV"):  # on vercel 
+    from .models.zakupy import *
+    from .models.product import Produkt
+else:  # Local
+    from models.zakupy import *
+    from models.product import Produkt
+
 
 # Decorators USER AUTHENTICATION
 def login_required(func):
@@ -27,7 +36,12 @@ def login_required(func):
             return redirect('/')
     return wrap
 
-from .user.routes import *
+
+
+if os.getenv("VERCEL_ENV"):  # on vercel 
+    from .user.routes import *
+else:  # Local
+    import user.routes
 
 @app.route('/', methods=('GET', 'POST'))
 def welcomepage():
@@ -193,4 +207,4 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

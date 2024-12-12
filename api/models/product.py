@@ -1,8 +1,12 @@
 from flask import jsonify
 from bson.objectid import ObjectId
 from datetime import datetime
+import os
 
-from ..basic import db
+if os.getenv("VERCEL_ENV"):  # Set on Vercel
+    from ..basic import db
+else:  # Local
+    from basic import db
 
 class Produkt: 
     @staticmethod

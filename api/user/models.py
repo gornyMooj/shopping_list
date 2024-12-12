@@ -1,7 +1,11 @@
 from flask import Flask, jsonify, request, session, redirect
 from passlib.hash import pbkdf2_sha256
+import os
 
-from ..basic import db
+if os.getenv("VERCEL_ENV"):  # Set on Vercel
+    from ..basic import db
+else:  # Local
+    from basic import db
 
 class User:
     def start_session(self, user):
