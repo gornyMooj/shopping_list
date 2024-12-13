@@ -71,6 +71,7 @@ def lista_zakupow(id):
     ''' opens selected list active ?'''
     shopping_list  = Produkt.get_shopping_list(id)
     list_details = Zakupy.get_list_details(id)
+    print(list_details)
     if shopping_list:
         return render_template('lista_zakupow.html', shopping_list=list(shopping_list), id=id, list_details=list_details)
     else:
@@ -108,6 +109,24 @@ def create_shopping_list():
         print(f"Error in create_shopping_list route: {e}")
         return jsonify({"error": "An unexpected error occurred when trying to add a new product"}), 500
     
+
+@app.route('/change-list-title', methods=['POST'])
+@login_required
+def change_list_title():
+    ''':changes lists's name in the db'''
+    try:
+        data = request.get_json()
+        result = Zakupy.change_list_title(data)
+        if result:
+            # !!!!!!!!!!!!!!!!!
+            return jsonify({"message": "The title has been changed ", "result": result}), 201
+        else:
+            return jsonify({"error": "Failed to rename the list"}), 500
+    except Exception as e:
+        print(f"Error in change_list_title route: {e}")
+        return jsonify({"error": "An unexpected error occurred when trying to rename the list"}), 500
+
+
 
 @app.route('/change-list-status', methods=['POST'])
 @login_required

@@ -18,7 +18,7 @@ body {
 
 }
 .top-header-wrapper-list {
-    height: calc(80px + 0.5vw);
+    height: calc(60px + 0.5vw);
 }
 
 .new-list-button {
@@ -29,6 +29,14 @@ body {
     cursor: pointer;
     
 }
+
+.back-button-list{
+    z-index: 3;
+    position: absolute;
+    top: 10px;
+    right: 95px;
+    cursor: pointer;
+}
 .new-product-button {
     cursor: pointer;
     z-index: 3;
@@ -37,12 +45,12 @@ body {
     right: 10px;
 }
 
-.new-list-button, .top-header-menu, .new-product-button {
+.new-list-button, .top-header-menu, .new-product-button, .back-button-list {
     color: black;
     transition: .3s;
 }
 
-.new-list-button:hover, .top-header-menu:hover, .new-product-button:hover {
+.new-list-button:hover, .top-header-menu:hover, .new-product-button:hover, .back-button-list:hover {
     color: aquamarine;
 }
 
@@ -52,10 +60,16 @@ body {
     background-color: aquamarine;
 
 }
-.top-header-title {
+.top-header-title, .change-title-container {
     font-weight: bold;
     padding-left: 4px;
-    padding-top: 14px;
+    padding-top: 8px;
+    cursor: pointer;
+}
+
+.change-title-container input {
+    width: calc(115px + 0.5vw);
+    padding-left: -1px;
 }
 
 
@@ -490,13 +504,6 @@ body:has(.container-slider:hover) .active-underliner-animation {
 
 
 /* WHEN MOBILE DEVICES BREAKPOINTS */
-@media (max-width: 600px) {
-    
-    .new-list-button:hover, .top-header-menu:hover, .new-product-button:hover {
-        color: blueviolet;
-    }
-}
-
 @media (max-width: 500px) {
     :root {
         --modal-top: 200px;
@@ -530,7 +537,24 @@ body:has(.container-slider:hover) .active-underliner-animation {
     .top-menu-list {
         border-right: 4px aquamarine solid;
     }
+
+    .zero-items {
+        position: absolute;
+        min-width:auto;
+        text-align: center;
+        left: 10px;
+        right: 10px;
+        transform: translate(0, 0);
+    }
 }
+
+@media (max-width: 600px) {
+    
+    .new-list-button:hover, .top-header-menu:hover, .new-product-button:hover,.back-button-list:hover {
+        color: lemonchiffon;
+    }
+}
+
 
 
   

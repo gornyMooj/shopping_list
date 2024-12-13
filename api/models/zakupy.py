@@ -85,7 +85,6 @@ class Zakupy:
                 'created_date': datetime.now(),
                 'products_bought': 'no',
                 'closed': "false",
-                'historical': "false",
                 'closed_date': datetime.now(),
                 'user': session['user']['_id']
             }
@@ -110,4 +109,16 @@ class Zakupy:
                 print(f"Could not change the list status to {close} because no document found with the given ID {id}.")
         except Exception as e:
             print(f"Error while changing the 'close' to {close} of the list {id} - error: {e}")
-            return False    
+            return False
+
+    @staticmethod
+    def change_list_title(data):
+        try:
+            result = db.zakupy.update_one(
+                {"_id": ObjectId(data['list_id'])},               
+                {"$set": {"name": data['newName']}}                   
+            )
+            return True
+        except Exception as e:
+            print(f"Error while renaming the list :{e}")
+            return False

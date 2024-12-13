@@ -255,6 +255,75 @@ async function toggleStatus(id) {
 }
 
 
+// change list name 
+function showChangeTitleContainer() {
+    document.querySelector(".top-header-title").style.display = 'none';
+    document.querySelector(".change-title-container").style.display = 'block';
+}
+
+function hideChangeTitleContainer(newName) {
+    document.querySelector(".main-title-holder").textContent = newName;
+    document.querySelector(".change-title-container").style.display = 'none';
+    document.querySelector(".top-header-title").style.display = 'block';
+
+}
+
+async function changeTitle(list_id) {
+    const newName = document.getElementById('new-name-input').value;
+    hideChangeTitleContainer(newName);
+    let data = {
+        newName: newName,
+        list_id: list_id
+    };
+    try {
+        let db_response = await fetch('/change-list-title', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        db_response = await db_response.json(); 
+
+        if (db_response && db_response.message) {
+            hideChangeTitleContainer(newName);
+        } else {
+            showErrorMessage("Nie zmieniono nazwy listy: " + db_response.error);  
+        }
+
+    } catch (error) {
+        showErrorMessage('Niestety nie udalo sie zmienic nazwy listy. ' + error)
+    }
+}
+
+
+async function closeList(list_id) {
+    // uploading data to db
+    try {
+        let data = {
+            id: list_id,
+            close: "true"
+        };
+        db_response = await fetch('/change-list-status', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        db_response = await db_response.json();
+        if (db_response && db_response.message) {
+            window.location.href= `/shopping-list/${list_id}`;
+        } else {
+            showErrorMessage(db_response.error);
+        }
+    } catch(error) {
+        showErrorMessage('Error when inserting data to db: ' + error)
+    }
+}
+
 
 
 
