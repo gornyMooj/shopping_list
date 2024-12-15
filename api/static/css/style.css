@@ -1,3 +1,20 @@
+:root {
+    --main-color: rgb(131, 56, 236);
+	--main-color-o1: rgba(131, 56, 236, 1);
+	--main-color-o02: rgba(131, 56, 236, .2);
+	--main-color-o00: rgba(131, 56, 236, 0);
+    --second-color: rgb(58, 134, 255);
+	--second-color-o1: rgba(58, 134, 255, 1);
+	--second-color-o00: rgba(58, 134, 255, .0);
+    --third-color: rgb(255, 190, 11);
+    --fourth-color: rgba(255, 0, 110, 1);
+    --fourth-color-o09: rgba(255, 0, 110, .9);
+	--yes-color: lightseagreen;
+	--no-color: #f1807e;
+}
+
+
+
 body {
     font-family: 'Inter';
     font-size: calc(14px + 0.5vw);
@@ -10,7 +27,7 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    background-color: blueviolet;
+    background-color: var(--main-color);;
     height: 60px;
 
     display: flex;
@@ -51,13 +68,13 @@ body {
 }
 
 .new-list-button:hover, .top-header-menu:hover, .new-product-button:hover, .back-button-list:hover {
-    color: aquamarine;
+    color: var(--second-color);
 }
 
 .top-header-body {
     min-width: 400px;
     height: 100%;
-    background-color: aquamarine;
+    background-color: var(--second-color);
 
 }
 .top-header-title, .change-title-container {
@@ -94,14 +111,14 @@ body {
     background-color: white;
     transition: 0.3s;
     padding: 20px 0px;
-    border-right: 2px aquamarine solid;
+    border-right: 2px var(--second-color);
 }
 
 .top-header-menu:hover + .top-menu-list,
 .top-menu-list:hover {
     visibility: visible;
     opacity: 1;
-    background-color: pink;
+    background-color: var(--fourth-color);
     pointer-events: auto; /* enables interaction when visible */
 }
 
@@ -114,16 +131,17 @@ body {
     cursor: pointer;
     background-color: rgba(138,43,226,0);
     transition: 0.3s;
+    color: white;
 }
 
 .menu-list-element svg {
-    color: rgba(138,43,226, 1);
+    color: var(--third-color);
     transition: 0.3s;
 }
 
 .top-menu-underliner {
     width: 0;
-    border: 2px solid aquamarine;
+    border: 2px solid var(--second-color);
     transition: all 0.7s ease;
 }
 
@@ -132,7 +150,7 @@ body {
 }
 
 .menu-list-element:hover > svg {
-    color: aquamarine;
+    color: var(--second-color);
 }
 
 .menu-list-element:hover > .top-menu-underliner {
@@ -169,8 +187,17 @@ body {
     
 }
 
+.second-row-sp {
+    font-size: calc(8px + 0.5vw);
+}
+
+.first-row-sp, .second-row-sp {
+    padding: 4px 0;
+
+}
+
 .container-shopping-list, .container-product-list{
-    background-color: aquamarine;
+    background-color: var(--second-color);
     min-width: 400px;
     display: flex;
     justify-content: center; 
@@ -189,7 +216,7 @@ body {
 
 .edit-menu-list {
     width: var(--edit-menu); 
-    background-color: blueviolet;
+    background-color: var(--main-color);
     margin-left: auto; 
     margin-right: 0;
     height: 100%;
@@ -225,9 +252,7 @@ body {
 }
 
 .first-row-sp {
-    background-color: yellowgreen;
-    background-color: lightyellow;
-    background-color: lemonchiffon;
+    background-color: var(--third-color);
 }
 
 .first-row-sp{
@@ -236,24 +261,17 @@ body {
     flex-wrap: wrap;
 }
 
-
-/* MODAL EDIT SHOPPING LIST MODAL 
-    sp - shopping list
-    bg - background
-    e  - edit
-    */
 :root {
     --modal-top: 50%;
     --modal-left: 50%;
     --modal-transform: translate(-50%, -50%);
-    --modal-container-color: pink;
 }
 
 .modal-button {
     background-color: transparent;
     background-repeat: no-repeat;
     font-weight: normal;
-    border: 2px aquamarine solid;
+    border: 2px var(--second-color) solid;
     padding: 8px;
     border-radius: 7px;
     cursor: pointer;
@@ -264,7 +282,7 @@ body {
 }
 .modal-button:hover {
     border-radius: 0;
-    background-color: rgba(138, 43, 226, .2);
+    background-color: var(--main-color-o02);
     font-weight: bold;
 }
 
@@ -280,7 +298,7 @@ body {
 
 .modal-container input:hover {
     /* border-radius: 0px; */
-    border-left: 2px dashed aquamarine;
+    border-left: 2px dashed var(--second-color);
     border-radius: 0;
 }
 
@@ -302,7 +320,7 @@ body {
 }
 .modal-container {
     width: 400px;
-    background-color: var(--modal-container-color);
+    background-color: var(--fourth-color);
     position: absolute;
     top: var(--modal-top); /* Use variables for top, left, and transform */
     left: var(--modal-left);
@@ -314,12 +332,14 @@ body {
 
     border-radius: 7px;
     padding: 20px 10px;
+
+    color: white;
 }
 
 .modal-body-wrapper {
     height: 100%;
     width: 100%;
-    background-color: var(--modal-container-color);
+    background-color: var(--fourth-color);
     display: flex;
     justify-content: center; 
     align-items: center;
@@ -338,15 +358,13 @@ body {
     font-weight: bold;
     padding: 10px 5px;
     margin-bottom: 16px;
-    border-bottom: 2px aquamarine solid;
-    background-color: blueviolet;
-    color: black;
-    
+    border-bottom: 2px var(--second-color) solid;
+    background-color: var(--main-color);    
 }
 
 .delete-underliner-animation {
     width: 20%;
-    border: 2px aquamarine solid;
+    border: 2px var(--second-color) solid;
     transition: 1s ease;
 }
 body:has(.modal-button:hover) .delete-underliner-animation {
@@ -355,7 +373,7 @@ body:has(.modal-button:hover) .delete-underliner-animation {
 
 .active-underliner-animation {
     width: 40%;
-    border: 2px aquamarine solid;
+    border: 2px var(--second-color) solid;
     transition: 1s ease;
 }
 body:has(.container-slider:hover) .active-underliner-animation {
@@ -415,11 +433,10 @@ body:has(.container-slider:hover) .active-underliner-animation {
     --slider-height: 30px;
     --toggle-width: calc(var(--slider-width) / 2);
     --radius-value: 50px;
-    --color-text-slider: aquamarine;
   }
 
   .container-slider {
-    background-color: aquamarine;
+    background-color: var(--second-color);
     cursor: pointer;
     position: relative;
     width: var(--slider-width);
@@ -430,7 +447,7 @@ body:has(.container-slider:hover) .active-underliner-animation {
   }
 
   .container-slider:hover {
-    background-color: rgba(138, 43, 226, .2);
+    background-color: var(--main-color-o02);
     border-radius: 0;
   }
 
@@ -446,7 +463,7 @@ body:has(.container-slider:hover) .active-underliner-animation {
     border-radius: var(--radius-value);
 
     /* text inside slider */
-    color: var(--color-text-slider);display: flex;
+    color: var(var(--second-color));display: flex;
     justify-content: center;
     align-items: center;
 
@@ -460,22 +477,22 @@ body:has(.container-slider:hover) .active-underliner-animation {
 
   @keyframes slideRight {
     0% {
-      background-color: lightseagreen;
+      background-color: var(--yes-color);
       left: 0;
     }
     100% {
-      background-color: #f1807e;
+      background-color: var(--no-color);
       left: calc(var(--slider-width) - var(--toggle-width));
     }
   }
 
   @keyframes slideLeft {
     0% {
-      background-color: #f1807e;
+      background-color: var(--no-color);
       left: calc(var(--slider-width) - var(--toggle-width));
     }
     100% {
-      background-color: lightseagreen;
+      background-color: var(--yes-color);
       left: 0;
     }
   }
@@ -491,16 +508,22 @@ body:has(.container-slider:hover) .active-underliner-animation {
 
 /* PRODUCTS LIST WHEN  */
 .bought-true {
-    background-color: lightseagreen;
+    background-color: var(--yes-color);
     transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 .bought-false {
-    background-color:  #f1807e;
+    background-color:  var(--no-color);
     transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 
+@media (max-width: 635px) {
+    
+    .new-list-button:hover, .top-header-menu:hover, .new-product-button:hover,.back-button-list:hover {
+        color: var(--third-color);
+    }
+}
 
 
 /* WHEN MOBILE DEVICES BREAKPOINTS */
@@ -510,7 +533,6 @@ body:has(.container-slider:hover) .active-underliner-animation {
         --modal-left: 10px;
         --modal-right: 10px;
         --modal-transform: translate(0, 0); /* Centering is no longer needed for mobile layout */
-    
     }
 
     .menu-list-element {
@@ -535,7 +557,7 @@ body:has(.container-slider:hover) .active-underliner-animation {
     }
 
     .top-menu-list {
-        border-right: 4px aquamarine solid;
+        border-right: 4px var(--second-color) solid;
     }
 
     .zero-items {
@@ -546,14 +568,12 @@ body:has(.container-slider:hover) .active-underliner-animation {
         right: 10px;
         transform: translate(0, 0);
     }
-}
 
-@media (max-width: 600px) {
-    
     .new-list-button:hover, .top-header-menu:hover, .new-product-button:hover,.back-button-list:hover {
-        color: lemonchiffon;
+        color: var(--main-color);
     }
 }
+
 
 
 

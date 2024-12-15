@@ -13,7 +13,7 @@ body {
 
     width: 500px;
     height: 400px;
-    background-color: blueviolet;
+    background-color: var(--main-color);
 }
 
 td label,.button-toggle-auth   {
@@ -37,7 +37,7 @@ td input {
     width: 100%;
     height: 100%;
     position: relative;
-    background-color: aquamarine;
+    background-color: var(--second-color);
     
 }
 
@@ -72,13 +72,13 @@ td input {
 
     font-size: 20px;
 
-    background-color: rgba(255, 192, 203, 1);
-    /* transition: .3s; */
+    background-color: var(--fourth-color);
+
 
 }
 
 .button-toggle-auth:hover {
-    background-color: rgb(245, 166, 179);
+    background-color: var(--fourth-color-o09);
 }
 
 .input-submit-button {
@@ -121,7 +121,7 @@ td input {
     
         font-size: 16px;
     
-        background-color: rgba(255, 192, 203, 1);
+        background-color: var(--fourth-color);
         /* transition: .3s; */
     }
  }

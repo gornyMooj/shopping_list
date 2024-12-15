@@ -6,7 +6,7 @@
     z-index: 998;
     display: none;
     border: none;
-    background-color: rgb(127, 255, 212, .0);
+    background-color: var(--second-color-o00);
     color: rgba(0, 0, 0, .125);;
     border-radius: 50%;
     transition: .3s;
@@ -17,8 +17,8 @@
 }
 
 #scroll-upp-button:hover {
-    color: rgba(138, 43, 226, 1);
-    background-color: rgb(127, 255, 212, 1);
+    color: var(--main-color-o1);
+    background-color: var(--second-color-o1);
 }
 
 

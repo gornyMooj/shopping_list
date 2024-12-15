@@ -54,7 +54,7 @@ function openCloseESPmenu(id, display_name) {
     // styles toggleElement based on closed
     toggleElement = document.querySelector('.toggle-element');
     toggleElement.addEventListener('click', toggleSlider) 
-    toggleElement.style.backgroundColor = "#f1807e";
+    toggleElement.style.backgroundColor = "var(--no-color)";
     toggleElement.innerHTML = "NIE"; 
     toggleElement.style.left = "calc(var(--slider-width) - var(--toggle-width))";
     // adds an event listener for when the animation ends
