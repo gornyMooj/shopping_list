@@ -3,9 +3,9 @@
 	--main-color-o1: rgba(131, 56, 236, 1);
 	--main-color-o02: rgba(131, 56, 236, .2);
 	--main-color-o00: rgba(131, 56, 236, 0);
-    --second-color: rgb(58, 134, 255);
-	--second-color-o1: rgba(58, 134, 255, 1);
-	--second-color-o00: rgba(58, 134, 255, .0);
+    --second-color: rgb(166, 200, 255);
+	--second-color-o1: rgba(166, 200, 255, 1);
+	--second-color-o00: rgba(166, 200, 255, .0);
     --third-color: rgb(255, 190, 11);
     --fourth-color: rgba(255, 0, 110, 1);
     --fourth-color-o09: rgba(255, 0, 110, .9);
