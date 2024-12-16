@@ -4,6 +4,7 @@
 	--main-color-o02: rgba(131, 56, 236, .2);
 	--main-color-o00: rgba(131, 56, 236, 0);
     --second-color: rgb(166, 200, 255);
+    --second-colo-o06: rgba(166, 200, 255, .6);
 	--second-color-o1: rgba(166, 200, 255, 1);
 	--second-color-o00: rgba(166, 200, 255, .0);
     --third-color: rgb(255, 190, 11);
@@ -555,6 +556,7 @@ body:has(.container-slider:hover) .active-underliner-animation {
     transition: bottom 0.3s ease-in-out;
     z-index: 1000;
     box-sizing: border-box;   /* makes sure that padding and margin want change the container size*/
+    border: 1px solid var(--second-colo-o06);
 }
 
   .modal-bottom-stats-title {
