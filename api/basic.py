@@ -69,11 +69,18 @@ def historical_lists():
 @login_required
 def lista_zakupow(id):
     ''' opens selected list active ?'''
-    shopping_list  = Produkt.get_shopping_list(id)
+    shopping_list  = list(Produkt.get_shopping_list(id))
     list_details = Zakupy.get_list_details(id)
-    print(list_details)
+    shopping_list_ser = [
+        {
+            '_id': str(x['_id']),
+            'id_zakupy': str(x['id_zakupy']),
+            **{k: v for k, v in x.items() if k not in ['_id', 'id_zakupy']}
+        }
+        for x in shopping_list
+    ]
     if shopping_list:
-        return render_template('lista_zakupow.html', shopping_list=list(shopping_list), id=id, list_details=list_details)
+        return render_template('lista_zakupow.html', shopping_list=shopping_list, id=id, list_details=list_details, shopping_list_ser=shopping_list_ser)
     else:
         return render_template('404.html'), 404
 

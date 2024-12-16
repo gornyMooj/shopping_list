@@ -321,7 +321,7 @@ body {
 .modal-container {
     width: 400px;
     background-color: var(--fourth-color);
-    position: absolute;
+    position: fixed;
     top: var(--modal-top); /* Use variables for top, left, and transform */
     left: var(--modal-left);
     transform: var(--modal-transform);
@@ -334,6 +334,7 @@ body {
     padding: 20px 10px;
 
     color: white;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .modal-body-wrapper {
@@ -516,6 +517,61 @@ body:has(.container-slider:hover) .active-underliner-animation {
     background-color:  var(--no-color);
     transition: background-color 0.5s ease, color 0.5s ease;
 }
+
+
+
+/* MODAL STATS BOTTOM */
+.modal-stats-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, .8);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 999;
+}
+
+.modal-stats-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-bottom-stats {
+    position: fixed;
+    bottom: -100%; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 400px;
+    max-height: 500px;
+    overflow-y: auto;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px 10px 0 0;
+    padding: 20px 10px;
+    transition: bottom 0.3s ease-in-out;
+    z-index: 1000;
+    box-sizing: border-box;   /* makes sure that padding and margin want change the container size*/
+}
+
+  .modal-bottom-stats-title {
+    font-weight: 500;
+    padding-bottom: 6px;
+  }
+
+  .modal-bottom-stats.open {
+    bottom: 0; 
+  }
+
+  #map {
+    height: 400px;
+    width: 100%;
+  }
+
+
 
 
 @media (max-width: 635px) {

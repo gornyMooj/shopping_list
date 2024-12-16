@@ -326,5 +326,52 @@ async function closeList(list_id) {
 
 
 
+// ############### stats part ###################
+let map;
+let markers;
+console.log(shopping_list_ser)
+function addMap() {
+    map = L.map('map');
+    const OpenStreetMap_Mapnik = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+
+    OpenStreetMap_Mapnik.addTo(map);
+    markers = L.markerClusterGroup();
+
+    shopping_list_ser.forEach((product) => {
+        const marker = L.marker([product.lat, product.long])
+        marker.bindPopup(product.name);
+        markers.addLayer(marker);
+    });
+    let markers_bounds = markers.getBounds();
+    map.fitBounds(markers_bounds);
+    map.addLayer(markers);
+}
+
+
+function showStatsMenu() {
+    const modal = document.getElementById('modalBottomStats');
+    const overlay = document.getElementById('modalStatsOverlay');
+    const isOpen = modal.classList.contains('open');
+    if (isOpen) {
+      modal.classList.remove('open');
+      overlay.classList.remove('open');
+      if(map) {
+        console.log(map)
+        // removes map when modal not opened
+        map.remove();
+        console.log('map has been removed when modal closed')
+        console.log(map)
+      }
+    } else {
+      modal.classList.add('open');
+      overlay.classList.add('open');
+      addMap();
+    };
+}
+
+
 
 

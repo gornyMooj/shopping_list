@@ -3,7 +3,7 @@
     height: 50px;
     bottom: 100px;
     right: 10px;
-    z-index: 998;
+    z-index: 920;
     display: none;
     border: none;
     background-color: var(--second-color-o00);
@@ -13,7 +13,7 @@
 }
 
 #scroll-upp-button svg{
-    z-index: 999;
+    z-index: 921;
 }
 
 #scroll-upp-button:hover {
