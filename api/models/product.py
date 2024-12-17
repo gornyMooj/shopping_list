@@ -22,6 +22,8 @@ class Produkt:
             product_details['added_date'] = datetime.now()
             product_details['purchase_date'] = None
             product_details['id_zakupy'] = ObjectId(product_details['id_zakupy'])
+            product_details['lat'] = 'Unknown'
+            product_details['long'] = 'Unknown'
 
             # Insert into the database
             result = db.produkty.insert_one(product_details)
@@ -79,10 +81,10 @@ class Produkt:
             )
             # returning  product_details on sucess 
             if not product_details['purchase_date']:
-                return {'purchase_date' : product_details['purchase_date']} # None
+                return {'purchase_date' : product_details['purchase_date'], 'product_details': product_details} # None
             else:
                 datetime_string = product_details['purchase_date'].strftime("%d %b %Y %H:%M") 
-                return {'purchase_date': datetime_string}
+                return {'purchase_date': datetime_string, 'product_details': product_details}
         except Exception as e:
             print(f"Error whne changing status of the product in the backend: {e}")
             return None

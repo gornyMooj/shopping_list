@@ -563,12 +563,17 @@ body:has(.container-slider:hover) .active-underliner-animation {
     font-weight: 500;
     padding-bottom: 6px;
   }
+  .modal-bottom-stats-subtitle {
+    font-weight: 500;
+    padding-bottom: 2px;
+    font-size: calc(9px + 0.5vw);;
+  }
 
   .modal-bottom-stats.open {
     bottom: 0; 
   }
 
-  #map {
+  #map_bought {
     height: 400px;
     width: 100%;
   }

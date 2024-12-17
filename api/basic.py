@@ -69,7 +69,8 @@ def historical_lists():
 @login_required
 def lista_zakupow(id):
     ''' opens selected list active ?'''
-    shopping_list  = list(Produkt.get_shopping_list(id))
+    shopping_list_cursor  = Produkt.get_shopping_list(id)
+    shopping_list = list(shopping_list_cursor)
     list_details = Zakupy.get_list_details(id)
     shopping_list_ser = [
         {
@@ -79,7 +80,7 @@ def lista_zakupow(id):
         }
         for x in shopping_list
     ]
-    if shopping_list:
+    if shopping_list_cursor:
         return render_template('lista_zakupow.html', shopping_list=shopping_list, id=id, list_details=list_details, shopping_list_ser=shopping_list_ser)
     else:
         return render_template('404.html'), 404
@@ -209,7 +210,7 @@ def update_product_status():
             return jsonify({"error": "Issues with data passed to the backend"}), 400
         result = Produkt.update_product_status(product_details)
         if result:
-             return jsonify({"message": f"Status changed", "purchase_date":  result["purchase_date"]}), 201
+             return jsonify({"message": f"Status changed", "purchase_date":  result["purchase_date"], 'product_details': result['product_details']}), 201
         else:
             return jsonify({"error": "Failed to chanege product's status"}), 500
     except Exception as e:

@@ -1,6 +1,8 @@
 // #lista_zakupow.html
 // #new_product modal
 
+// console.log(JSON.stringify(shopping_list_ser));
+
 document.addEventListener('DOMContentLoaded', (event) => { 
     toggleZeroElements ();
 })
@@ -49,7 +51,10 @@ function removeItemFromDOMSlide(id){
     sp.classList.add('slide-out');
     // waits for the animation to complete (match duration in CSS)
     sp.addEventListener('animationend', () => {
-        sp.remove(); // Remove the element from the DOM after animation ends
+        sp.remove(); // removes the element from the DOM after animation ends
+        shopping_list_ser = shopping_list_ser.filter(function(p) {
+            return p._id != id;
+         }); // removes product from json
         toggleZeroElements();
     });
 }
@@ -125,16 +130,16 @@ async function addNewProduct(id) {
     const productDetails = {
         name: name,
         quantity: quantity,
-        lat:  'Unknown', 
-        long: 'Unknown', 
+        lat_added:  'Unknown', 
+        long_added: 'Unknown', 
         id_zakupy: id
     };
 
     // getting geolocation details
 	try {
 		let position = await getCurrentLocationWithTimeout(1000);
-        productDetails.lat = position.coords.latitude;
-        productDetails.long =  position.coords.longitude;
+        productDetails.lat_added = position.coords.latitude;
+        productDetails.long_added =  position.coords.longitude;
     } catch (error) {
         showErrorMessage('Twoja geolokalizacja nie jest aktywna. ' + error)
     }
@@ -153,6 +158,7 @@ async function addNewProduct(id) {
 
         if (db_response && db_response.message) {
             addProductToPage(db_response.product_details);
+            shopping_list_ser.push(db_response.product_details); // adds product to JSON
             toggleZeroElements ()
         } else {
             // fetch worked however there was problem on the server side 
@@ -243,8 +249,13 @@ async function toggleStatus(id) {
             } else {
                 purchase_date_e.textContent = 'None';
             }
-            
-
+            // updaets coordinates in the JSON data
+            shopping_list_ser.forEach((p) => {
+                if (p._id === db_response.product_details.product_id) {
+                    p.lat = db_response.product_details.lat;
+                    p.long = db_response.product_details.long;
+                }
+            });
         } else {
             showErrorMessage(`Nie udało się zmienić statusu produktu ${db_response.error}`);
         }
@@ -327,48 +338,65 @@ async function closeList(list_id) {
 
 
 // ############### stats part ###################
-let map;
-let markers;
-console.log(shopping_list_ser)
+let map_bought;
+let markers_bought = L.markerClusterGroup();
+let markers_list_bought = [];
+
 function addMap() {
-    map = L.map('map');
+    map_bought = L.map('map_bought');
     const OpenStreetMap_Mapnik = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     });
 
-    OpenStreetMap_Mapnik.addTo(map);
-    markers = L.markerClusterGroup();
+    OpenStreetMap_Mapnik.addTo(map_bought);
+    map_bought.setView([51.9194, 19.1451], 5);
+}
 
+
+function addLayersToMap() {
+    // remove all layers markers.clearLayers();
+    if (markers_list_bought.length > 0) {
+        markers_bought.clearLayers();
+        markers_list_bought = [];
+    }
+    // adds markers to markers_bought markerClusterGroup & markers_list_bought
     shopping_list_ser.forEach((product) => {
+        if (product.lat == 'Unknown' ||  product.long == 'Unknown') {
+            return;
+        } // break forEach if needed
         const marker = L.marker([product.lat, product.long])
         marker.bindPopup(product.name);
-        markers.addLayer(marker);
+        markers_bought.addLayer(marker);
+        markers_list_bought.push(marker);
     });
-    let markers_bounds = markers.getBounds();
-    map.fitBounds(markers_bounds);
-    map.addLayer(markers);
+
+    // adds markerClusterGroup to map
+    if(markers_list_bought.length != 0) {
+        let markers_bounds = markers_bought.getBounds();
+        map_bought.fitBounds(markers_bounds);
+        map_bought.addLayer(markers_bought);
+   } else {
+    map_bought.setView([51.9194, 19.1451], 5);
+   }
 }
 
 
 function showStatsMenu() {
+    // opens popup menu with maps overlay and more
     const modal = document.getElementById('modalBottomStats');
     const overlay = document.getElementById('modalStatsOverlay');
     const isOpen = modal.classList.contains('open');
+    if(!map_bought) {
+        addMap(); 
+    };
     if (isOpen) {
       modal.classList.remove('open');
       overlay.classList.remove('open');
-      if(map) {
-        console.log(map)
-        // removes map when modal not opened
-        map.remove();
-        console.log('map has been removed when modal closed')
-        console.log(map)
-      }
     } else {
       modal.classList.add('open');
       overlay.classList.add('open');
-      addMap();
+      addLayersToMap();
     };
 }
 

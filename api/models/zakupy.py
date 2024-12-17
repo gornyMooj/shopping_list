@@ -84,6 +84,8 @@ class Zakupy:
                 'display_name': geo_data['display_name'],
                 'created_date': datetime.now(),
                 'products_bought': 'no',
+                'lat': geo_data['lat'],
+                'long': geo_data['long'],
                 'closed': "false",
                 'closed_date': datetime.now(),
                 'user': session['user']['_id']
