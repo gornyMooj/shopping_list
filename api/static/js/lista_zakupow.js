@@ -381,13 +381,39 @@ function addLayersToMap() {
     shopping_list_ser.forEach((product) => {
         if (product.lat != 'Unknown' &&  product.long != 'Unknown') {
             const marker_bought = L.marker([product.lat, product.long])
-            marker_bought.bindPopup(product.name);
+            marker_bought.bindPopup(`<div> <b>${product.name}</b> <table class='popup-table'>
+                                                                        <tr>
+                                                                            <td>Dodano do listy:</td>
+                                                                            <td>${product.added_date}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Produkt zakupiono: </td>
+                                                                            <td>${product.purchase_date}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Ilość: </td>
+                                                                            <td>${product.quantity}</td>
+                                                                        </tr>
+                                                                    </table>`);
             markers_bought.addLayer(marker_bought);
             markers_list_bought.push(marker_bought);
         };
         if (product.lat_added != 'Unknown' &&  product.long_added != 'Unknown') {
             const marker_added = L.marker([product.lat_added, product.long_added])
-            marker_added.bindPopup(product.name);
+            marker_added.bindPopup(`<div> <b>${product.name}</b> <table class='popup-table'>
+                                                                        <tr>
+                                                                            <td>Dodano do listy:</td>
+                                                                            <td>${product.added_date}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Produkt zakupiono: </td>
+                                                                            <td>${product.purchase_date}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Ilość: </td>
+                                                                            <td>${product.quantity}</td>
+                                                                        </tr>
+                                                                    </table>`);
             markers_added.addLayer(marker_added);
             markers_list_added.push(marker_added);
         };
@@ -431,6 +457,8 @@ function showStatsMenu() {
       addLayersToMap();
     };
 }
+
+console.log(shopping_list_ser)
 
 
 
