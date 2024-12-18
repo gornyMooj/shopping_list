@@ -338,19 +338,29 @@ async function closeList(list_id) {
 
 
 // ############### stats part ###################
-let map_bought;
+let map_bought, map_added;
 let markers_bought = L.markerClusterGroup();
+let markers_added = L.markerClusterGroup();
 let markers_list_bought = [];
+let markers_list_added = [];
 
 function addMap() {
-    map_bought = L.map('map_bought');
-    const OpenStreetMap_Mapnik = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    const map_bm_bought = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+    const map_bm_added = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     });
 
-    OpenStreetMap_Mapnik.addTo(map_bought);
+    map_bought = L.map('map_bought');
+    map_bm_bought.addTo(map_bought);
     map_bought.setView([51.9194, 19.1451], 5);
+
+    map_added = L.map('map_added');
+    map_bm_added.addTo(map_added);
+    map_added.setView([51.9194, 19.1451], 5);
 }
 
 
@@ -360,15 +370,28 @@ function addLayersToMap() {
         markers_bought.clearLayers();
         markers_list_bought = [];
     }
+
+    if (markers_list_added.length > 0) {
+        markers_added.clearLayers();
+        markers_list_added = [];
+    }
+
+
     // adds markers to markers_bought markerClusterGroup & markers_list_bought
     shopping_list_ser.forEach((product) => {
-        if (product.lat == 'Unknown' ||  product.long == 'Unknown') {
-            return;
-        } // break forEach if needed
-        const marker = L.marker([product.lat, product.long])
-        marker.bindPopup(product.name);
-        markers_bought.addLayer(marker);
-        markers_list_bought.push(marker);
+        if (product.lat != 'Unknown' &&  product.long != 'Unknown') {
+            const marker_bought = L.marker([product.lat, product.long])
+            marker_bought.bindPopup(product.name);
+            markers_bought.addLayer(marker_bought);
+            markers_list_bought.push(marker_bought);
+        };
+        if (product.lat_added != 'Unknown' &&  product.long_added != 'Unknown') {
+            const marker_added = L.marker([product.lat_added, product.long_added])
+            marker_added.bindPopup(product.name);
+            markers_added.addLayer(marker_added);
+            markers_list_added.push(marker_added);
+        };
+       
     });
 
     // adds markerClusterGroup to map
@@ -377,8 +400,17 @@ function addLayersToMap() {
         map_bought.fitBounds(markers_bounds);
         map_bought.addLayer(markers_bought);
    } else {
-    map_bought.setView([51.9194, 19.1451], 5);
+        map_bought.setView([51.9194, 19.1451], 5);
    }
+
+   if(markers_list_added.length != 0) {
+        let markers_bounds = markers_added.getBounds();
+        map_added.fitBounds(markers_bounds);
+        map_added.addLayer(markers_added);
+    } else {
+        map_added.setView([51.9194, 19.1451], 5);
+    }
+
 }
 
 
