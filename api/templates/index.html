@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/error_message.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/loader_circle.css')}}">
+
+    <!-- unified twemoji source: https://github.com/twitter/twemoji -->
+    <!-- <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script> -->
+
+    <link rel="icon" href="{{url_for('static', filename='images/favicon.svg')}}" sizes="any" type="image/svg+xml">
     
     {% block head %}{% endblock %}
 </head>
